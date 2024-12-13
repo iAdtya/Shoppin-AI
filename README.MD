@@ -1,5 +1,14 @@
 # Multiple Methods of Image Similarity Search
 
+## Comparative Evaluation
+
+| Method             | Precision | Recall    | Scalability | Complexity |
+| ------------------ | --------- | --------- | ----------- | ---------- |
+| Autoencoder        | Medium    | Medium    | Medium      | Low        |
+| Vision Transformer | High      | High      | High        | Medium     |
+| KNN with ViT       | High      | High      | Very High   | Medium     |
+| Diffusion Models   | Very High | Very High | Low         | High       |
+
 ## 1. Autoencoder-Based Approach
 
 - Use an autoencoder to encode input images into a latent space (a compressed feature representation).
@@ -65,12 +74,3 @@
 - Ideal for high-accuracy requirements in small datasets.
 
 ---
-
-## Comparative Evaluation
-
-| Method             | Precision | Recall    | Scalability | Complexity |
-| ------------------ | --------- | --------- | ----------- | ---------- |
-| Autoencoder        | Medium    | Medium    | Medium      | Low        |
-| Vision Transformer | High      | High      | High        | Medium     |
-| KNN with ViT       | High      | High      | Very High   | Medium     |
-| Diffusion Models   | Very High | Very High | Low         | High       |
