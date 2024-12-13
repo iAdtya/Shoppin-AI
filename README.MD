@@ -1,13 +1,13 @@
 # Multiple Methods of Image Similarity Search
 
-## Comparative Evaluation
+## Comparison
 
-| Method             | Precision | Recall    | Scalability | Complexity |
-| ------------------ | --------- | --------- | ----------- | ---------- |
-| Autoencoder        | Medium    | Medium    | Medium      | Low        |
-| Vision Transformer | High      | High      | High        | Medium     |
-| KNN with ViT       | High      | High      | Very High   | Medium     |
-| Diffusion Models   | Very High | Very High | Low         | High       |
+| Method             | Precision | Recall    | Retrieval Accuracy | Scalability | Complexity |
+| ------------------ | --------- | --------- | ------------------ | ----------- | ---------- |
+| Autoencoder        | Medium    | Medium    | Medium             | Medium      | Low        |
+| Vision Transformer | High      | High      | High               | High        | Medium     |
+| KNN with ViT       | High      | High      | High               | Very High   | Medium     |
+| Diffusion Models   | Very High | Very High | Very High          | Low         | High       |
 
 ## 1. Autoencoder-Based Approach
 

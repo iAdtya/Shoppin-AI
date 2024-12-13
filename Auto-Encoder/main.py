@@ -10,7 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 class Autoencoder(nn.Module):
     def __init__(self):
         super(Autoencoder, self).__init__()
-        
+
         # Encoder layers
         self.encoder = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1),
@@ -21,17 +21,23 @@ class Autoencoder(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Conv2d(16, 8, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2)
+            nn.MaxPool2d(kernel_size=2, stride=2),
         )
-        
+
         # Decoder layers
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(8, 16, kernel_size=3, stride=2, padding=1, output_padding=1),
+            nn.ConvTranspose2d(
+                8, 16, kernel_size=3, stride=2, padding=1, output_padding=1
+            ),
             nn.ReLU(),
-            nn.ConvTranspose2d(16, 32, kernel_size=3, stride=2, padding=1, output_padding=1),
+            nn.ConvTranspose2d(
+                16, 32, kernel_size=3, stride=2, padding=1, output_padding=1
+            ),
             nn.ReLU(),
-            nn.ConvTranspose2d(32, 3, kernel_size=3, stride=2, padding=1, output_padding=1),
-            nn.Sigmoid()
+            nn.ConvTranspose2d(
+                32, 3, kernel_size=3, stride=2, padding=1, output_padding=1
+            ),
+            nn.Sigmoid(),
         )
 
     def forward(self, x):
@@ -43,15 +49,19 @@ class Autoencoder(nn.Module):
 # Define the Autoencoder-Based Image Search Engine
 class AutoencoderImageSearchEngine:
     def __init__(self, autoencoder, device=None):
-        self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = (
+            device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+        )
         self.autoencoder = autoencoder.to(self.device)
         self.autoencoder.eval()  # Set model to evaluation mode
         self.image_embeddings = {}
-        self.transform = transforms.Compose([
-            transforms.Resize((128, 128)),
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-        ])
+        self.transform = transforms.Compose(
+            [
+                transforms.Resize((128, 128)),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ]
+        )
 
     def preprocess_image(self, image_path):
         """
