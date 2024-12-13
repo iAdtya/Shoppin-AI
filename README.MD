@@ -11,17 +11,13 @@
 
 ## 1. Autoencoder-Based Approach
 
-- Use an autoencoder to encode input images into a latent space (a compressed feature representation).
-- During a query, compare the latent vector of the query image with those of stored images using metrics like cosine similarity or Euclidean distance.
+- Use an autoencoder to encode input images into a latent space.
+- During a query, compare the latent vector of the query image with those of stored images using distance metrics like cosine similarity or nucleus sampling, Euclidean distance.
 
 ### Advantages of Autoencoder-Based Approach
 
 - Simple and unsupervised.
 - Effective for dimensionality reduction.
-
-### Applications of Autoencoder-Based Approach
-
-- Useful for small-to-medium-scale datasets with diverse image content.
 
 ---
 
@@ -29,15 +25,11 @@
 
 - Use a Vision Transformer (ViT) to encode input images into sequence-based embeddings.
 - Utilize self-attention mechanisms to capture global image relationships.
-- Perform similarity comparisons using distance metrics or clustering techniques.
 
 ### Advantages of ViT-Based Approach
 
 - Captures global context effectively.
 - Scalable for large and diverse datasets.
-
-### Applications of ViT-Based Approach
-
 - Works well for highly complex or structured datasets.
 
 ---
@@ -53,10 +45,6 @@
 - Efficient for large datasets with pre-built indices.
 - Can handle dynamic updates to the dataset.
 
-### Applications of KNN-Based Approach with ViT
-
-- Suitable for real-time search applications.
-
 ---
 
 ## 4. Diffusion Model-Based Approach
@@ -68,9 +56,6 @@
 
 - High precision and recall.
 - Effective for complex image representations.
-
-### Applications of Diffusion Model-Based Approach
-
-- Ideal for high-accuracy requirements in small datasets.
+- Ideal for high-accuracy.
 
 ---
