@@ -2,12 +2,23 @@
 
 ## Comparison
 
-| Method             | Precision | Recall    | Retrieval Accuracy | Scalability | Complexity |
-| ------------------ | --------- | --------- | ------------------ | ----------- | ---------- |
-| Autoencoder        | Medium    | Medium    | Medium             | Medium      | Low        |
-| Vision Transformer | High      | High      | High               | High        | Medium     |
-| KNN with ViT       | High      | High      | High               | Very High   | Medium     |
-| Diffusion Models   | Very High | Very High | Very High          | Low         | High       |
+| Method             | Precision | Recall    | Retrieval Accuracy | Scalability |
+| ------------------ | --------- | --------- | ------------------ | ----------- |
+| Hybrid-Search      | Very High | Very High | Very High          | Very High   |
+| Autoencoder        | Medium    | Medium    | Medium             | Medium      |
+| Vision Transformer | High      | High      | High               | High        |
+| KNN with ViT       | High      | High      | High               | Very High   |
+| Diffusion Models   | Very High | Very High | Very High          | Low         |
+
+## 0. Best approach (Hybrid-Search)
+
+- hybrid approach that leverages the strengths of diffusion models for feature extraction and a vector database for efficient similarity search.
+
+## Advantages of Hybrid-Search Approach
+
+- High precision and recall due to the combination of multiple methods.
+- Great for real-time applications.
+- Scalable and adaptable to different types of image retrieval tasks.
 
 ## 1. Autoencoder-Based Approach
 
