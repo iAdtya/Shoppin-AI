@@ -108,7 +108,6 @@ class AutoencoderImageSearchEngine:
 def main():
     # Load a pre-trained Autoencoder or initialize a new one
     autoencoder = Autoencoder()
-    # Assume the autoencoder is trained; you can call the training function if needed
 
     search_engine = AutoencoderImageSearchEngine(autoencoder)
 

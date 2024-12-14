@@ -76,10 +76,8 @@ def main():
     search_engine.add_image("image2", "pdfgpt.png")
     search_engine.add_image("image3", "Gaussian.png")
 
-    # Build the KNN index
     search_engine.build_index()
 
-    # Perform a search
     results = search_engine.search_similar("logo.png")
 
     print("Search Results:")

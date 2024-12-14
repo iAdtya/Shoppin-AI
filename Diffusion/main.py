@@ -4,6 +4,7 @@ from torchvision.transforms.functional import resize
 from PIL import Image
 import numpy as np
 
+
 # Diffusion Model Feature Extractor
 class DiffusionFeatureExtractor:
     def __init__(self, model, device="cpu"):
@@ -22,6 +23,7 @@ class DiffusionFeatureExtractor:
             features = self.model(image)
         return features.squeeze(0).cpu().numpy()
 
+
 # Cosine Similarity Search Engine
 class CosineSimilaritySearchEngine:
     def __init__(self):
@@ -34,7 +36,6 @@ class CosineSimilaritySearchEngine:
         ids, features = zip(*self.feature_db.items())
         features = np.array(features)
 
-        # Normalize features
         query_norm = query_feature / np.linalg.norm(query_feature)
         db_norm = features / np.linalg.norm(features, axis=1, keepdims=True)
 
@@ -43,25 +44,27 @@ class CosineSimilaritySearchEngine:
         results = [(ids[idx], similarities[idx]) for idx in top_indices]
         return results
 
-# Mock Diffusion Model
+
 class MockDiffusionModel(torch.nn.Module):
     def __init__(self, output_dim):
         super(MockDiffusionModel, self).__init__()
         self.fc = torch.nn.Linear(3 * 32 * 32, output_dim)
 
     def forward(self, x):
-        x = x.view(x.size(0), -1)  # Flatten image
+        x = x.view(x.size(0), -1)
         x = self.fc(x)
         return x
 
+
 # Main
 if __name__ == "__main__":
-    # Setup
-    transform = transforms.Compose([
-        transforms.Resize((32, 32)),  # Resize to a consistent size
-        transforms.ToTensor(),       # Convert to Tensor
-        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])  # Normalize the data
-    ])
+    transform = transforms.Compose(
+        [
+            transforms.Resize((32, 32)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
+        ]
+    )
 
     output_dim = 128  # Output feature dimension
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -71,7 +74,11 @@ if __name__ == "__main__":
     search_engine = CosineSimilaritySearchEngine()
 
     # Feature Extraction and Indexing
-    image_paths = {"image1": "logo.png", "image2": "pdfgpt.png", "image3": "Gaussian.png"}
+    image_paths = {
+        "image1": "logo.png",
+        "image2": "pdfgpt.png",
+        "image3": "Gaussian.png",
+    }
 
     for image_id, path in image_paths.items():
         feature = feature_extractor.extract_features(path, transform)
