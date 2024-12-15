@@ -64,17 +64,11 @@ class AutoencoderImageSearchEngine:
         )
 
     def preprocess_image(self, image_path):
-        """
-        Preprocess a single image for the Autoencoder model.
-        """
         image = Image.open(image_path).convert("RGB")
         image = self.transform(image).unsqueeze(0)  # Add batch dimension
         return image.to(self.device)
 
     def encode_image(self, image_path):
-        """
-        Encode an image into an embedding using the Autoencoder model.
-        """
         image_tensor = self.preprocess_image(image_path)
         with torch.no_grad():
             encoded, _ = self.autoencoder(image_tensor)
@@ -82,16 +76,10 @@ class AutoencoderImageSearchEngine:
         return encoded.view(encoded.size(0), -1).cpu().numpy()
 
     def add_image(self, image_id, image_path):
-        """
-        Add an image to the search engine by encoding and storing its embedding.
-        """
         embedding = self.encode_image(image_path)
         self.image_embeddings[image_id] = embedding
 
     def search_similar(self, query_image_path, top_k=5):
-        """
-        Search for similar images given a query image.
-        """
         query_embedding = self.encode_image(query_image_path)
         similarities = {}
 

@@ -18,17 +18,11 @@ class ViTImageSearchEngine:
         self.image_embeddings = {}
 
     def preprocess_image(self, image_path):
-        """
-        Preprocess a single image for the ViT model.
-        """
         image = Image.open(image_path).convert("RGB")
         inputs = self.feature_extractor(images=image, return_tensors="pt")
         return {k: v.to(self.device) for k, v in inputs.items()}
 
     def encode_image(self, image_path):
-        """
-        Encode an image into an embedding using the ViT model.
-        """
         inputs = self.preprocess_image(image_path)
         with torch.no_grad():
             outputs = self.model(**inputs)
@@ -36,16 +30,10 @@ class ViTImageSearchEngine:
         return outputs.last_hidden_state[:, 0, :].cpu().numpy()
 
     def add_image(self, image_id, image_path):
-        """
-        Add an image to the search engine by encoding and storing its embedding.
-        """
         embedding = self.encode_image(image_path)
         self.image_embeddings[image_id] = embedding
 
     def search_similar(self, query_image_path, top_k=5):
-        """
-        Search for similar images given a query image.
-        """
         query_embedding = self.encode_image(query_image_path)
         similarities = {}
 

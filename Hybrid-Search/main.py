@@ -16,13 +16,16 @@ class DiffusionFeatureExtractor:
     def extract_features(self, image_path, transform):
         try:
             image = Image.open(image_path).convert("RGB")
+            # print(image)
         except Exception as e:
             print(f"Error loading image {image_path}: {e}")
             return None
 
+        # TODO Transforms the image to a tensor of shape (3, 32, 32) Adds a dimension of size 1 at position 0. (3, 32, 32) becomes (1, 3, 32, 32)
         image = transform(image).unsqueeze(0).to(self.device)
         with torch.no_grad():
             features = self.model(image)
+        # TODO (3, 32, 32) to (1, 3, 32, 32). 1: Batch size 3: Number of channels (RGB) 32: Height 32: Width Removes the dimension of size 1 at position 0. Example: (1, 128) becomes (128)
         return features.squeeze(0).cpu().numpy()
 
 
@@ -30,9 +33,11 @@ class DiffusionFeatureExtractor:
 class MockDiffusionModel(torch.nn.Module):
     def __init__(self, output_dim):
         super(MockDiffusionModel, self).__init__()
+        # 3072 input neurons and 128 output neurons.
         self.fc = torch.nn.Linear(3 * 32 * 32, output_dim)
 
     def forward(self, x):
+        # TODO reshapes the tensor to (1, 3 * 32 * 32) or (1, 3072).
         x = x.view(x.size(0), -1)
         x = self.fc(x)
         return x
@@ -83,7 +88,8 @@ if __name__ == "__main__":
                     )
                 ],
             )
-
+            
+    # todo Cosine Similarity
     query_feature = feature_extractor.extract_features("logo.png", transform)
     if query_feature is not None:
         hits = client.search(
