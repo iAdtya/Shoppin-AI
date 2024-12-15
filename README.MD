@@ -10,8 +10,18 @@
 | KNN with ViT       | High      | High      | High               | Very High   |
 | Diffusion Models   | Very High | Very High | Very High          | Low         |
 
+## Run on Colab
+
 ```sh
-pip install -r requirements.txt
+!git clone https://github.com/iAdtya/Shoppin-AI
+```
+
+```sh
+!pip install -r requirements.txt
+```
+
+```sh
+!python Hybrid-Search\main.py
 ```
 
 ## 0. Best approach (Hybrid-Search)
