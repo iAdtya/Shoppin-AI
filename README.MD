@@ -10,6 +10,10 @@
 | KNN with ViT       | High      | High      | High               | Very High   |
 | Diffusion Models   | Very High | Very High | Very High          | Low         |
 
+```sh
+pip install -r requirements.txt
+```
+
 ## 0. Best approach (Hybrid-Search)
 
 - hybrid approach that leverages the strengths of diffusion models for feature extraction and a vector database for efficient similarity search.

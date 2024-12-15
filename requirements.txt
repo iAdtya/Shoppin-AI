@@ -1,0 +1,7 @@
+torch
+torchvision
+Pillow
+numpy
+qdrant-client
+scikit-learn
+transformers  
